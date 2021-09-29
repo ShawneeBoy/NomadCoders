@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+		<link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="image/jpg" href="favicon/favicon-32x32.png"/>
+    <title>New Tab</title>
+	</head>
+	<body>
+    <div class="clock">
+      00:00:00
+    </div>
+    <div class="title hidden">
+      Hey. Nice to meet you.
+    </div>
+    <form id="login-form">
+      <input id="nameInput" required autocomplete="off" type="text" placeholder="What's your name?"/>
+    </form>
+    <form id="todo-form">
+      <input id="todoInput" required autocomplete="off" type="text" placeholder="What's your plan for today?"/>
+    </form>
+    <ul id="todo-list">
+      <div>To-dos</div>
+    </ul>
+    <div class="quote">
+      <span></span>
+      <span></span>
+    </div>
+    <script src="scripts/greeting.js"></script>
+    <script src="scripts/clock.js"></script>
+    <script src="scripts/quote.js"></script>
+    <script src="scripts/background.js"></script>
+    <script src="scripts/todo.js"></script>
+    <!-- <script src="scripts/weather.js"></script> -->
+	</body>
+</html>
