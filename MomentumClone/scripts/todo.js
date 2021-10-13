@@ -48,6 +48,8 @@ function handleTodoSubmit(e){
 
 todoForm.addEventListener("submit", handleTodoSubmit);
 
+// Code below runs on document load
+
 const savedTodos = localStorage.getItem(TODOS_KEY);
 
 if(savedTodos){
