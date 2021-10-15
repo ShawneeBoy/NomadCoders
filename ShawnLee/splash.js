@@ -4,8 +4,6 @@ const logoSpan = document.querySelectorAll(".introText");
 
 function handleSplashScreen(e){
   
-  intro.style.opacity = "100%";
-  
   setTimeout(()=>{
     logoSpan.forEach((span, idx)=>{
       setTimeout(()=>{
