@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<!-- Copyright: 2021.11.01 참모2 정보병 상병 이시현 -->
+
+<html>
+  <head>
+    <title>선박결산</title>
+    <style>
+      
+      
+      
+      *{
+        box-sizing: border-box;
+      }
+      
+      table{
+        margin: 20px;
+        text-align: center; 
+        border-collapse: collapse;
+      }
+      
+      table td, th{
+        border: 1px solid black;
+        padding: 7px 10px;
+      }
+      
+      table tr:nth-child(even) td{
+        background: #eeeeee;
+      }
+      
+      .inputArea, .selectWidgets{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .widgetHolders{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      #button{
+        padding: 10px 20px;
+      }
+      
+      #textInput{
+        padding: 20px;
+        margin: 10px;
+        width: 50%;
+      }
+      #dateInput{
+        padding: 10px;
+        margin: 10px;
+      }
+      #timeInput{
+        padding: 10px;
+        margin: 10px;
+        text-align: center;
+      }
+      
+      .copyright{
+        text-align: center;
+        font-size: 0.5rem;
+        color: #cccccc;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="inputArea">
+      <h1>
+        Ship Calculator
+      </h1>
+      <textarea id="textInput" placeholder="Paste here..."></textarea>
+      
+      <div class="widgetHolders">
+        <div class="selectWidgets">
+          <label for="dateInput">며칠 기준 결산?</label>
+          <input type="date" id="dateInput">
+        </div>
+
+        <div class="selectWidgets">
+          <label for="timeInput">몇시 기준 결산?</label>
+          <select id="timeInput">
+            <option value="0600">06시</option>
+            <option selected="selected" value="1400">14시</option>
+            <option value="0700">07시</option>
+            <option value="0800">08시</option>
+            <option value="0900">09시</option>
+            <option value="1000">10시</option>
+            <option value="1100">11시</option>
+            <option value="1200">12시</option>
+            <option value="1300">13시</option>
+            <option value="1500">15시</option>
+            <option value="1600">16시</option>
+            <option value="1700">17시</option>
+            <option value="1800">18시</option>
+          </select>
+        </div>
+      </div>
+      
+      <button id="button">결산하기</button>
+      <table id="table">
+      </table>
+      <p class="copyright">
+        ⓒ 2021/11/1<br>상병 이시현<br>35사단 참모소대 정보병
+      </p>
+    </div>
+    
+    <script>
+      
+      const tbl = document.getElementById("table");
+      const textInput = document.getElementById("textInput");
+      const button = document.getElementById("button");
+      const dateInput = document.getElementById("dateInput");
+      let today = "";
+      
+      // Date picker
+      Date.prototype.toDateInputValue = (function() {
+          var local = new Date(this);
+          local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+          return local.toJSON().slice(0,10);
+      });
+      
+      dateInput.value = new Date().toDateInputValue();
+      
+      
+      
+      function createShipTable(ships){
+        console.log(`creating table from ${today}`);
+        tbl.innerHTML = "";
+        
+        //Header cells
+        let tr = tbl.insertRow();
+        let th = document.createElement("TH");
+        th.innerHTML = "번호";
+        tr.appendChild(th);
+        th = document.createElement("TH")
+        th.innerHTML = "입항부두";
+        tr.appendChild(th);;
+        th = document.createElement("TH")
+        th.innerHTML = "선명";
+        tr.appendChild(th);;
+        th = document.createElement("TH")
+        th.innerHTML = "국적";
+        tr.appendChild(th);;
+        th = document.createElement("TH")
+        th.innerHTML = "선종";
+        tr.appendChild(th);;
+        th = document.createElement("TH")
+        th.innerHTML = "입항일시";
+        tr.appendChild(th);;
+        th = document.createElement("TH")
+        th.innerHTML = "출항일시";
+        tr.appendChild(th);;
+        th = document.createElement("TH")
+        th.innerHTML = "전항지";
+        tr.appendChild(th);;
+        th = document.createElement("TH")
+        th.innerHTML = "차항지";
+        tr.appendChild(th);;
+        let count = 0;
+        for(ship of ships){
+          if(ship["tkoffDt"] === null || ship["tkoffDt"] > today){
+            count++;
+            let tr = tbl.insertRow();
+            let td = tr.insertCell();
+            td.appendChild(document.createTextNode(count.toString()));
+            td = tr.insertCell();
+            td.appendChild(document.createTextNode(ship["laidupFcltyNm"]));
+            td = tr.insertCell();
+            td.appendChild(document.createTextNode(ship["vsslNm"]));
+            td = tr.insertCell();
+            td.appendChild(document.createTextNode(ship["vsslNltyNm"]));
+            td = tr.insertCell();
+            td.appendChild(document.createTextNode(ship["vsslKindNm"]));
+            //입항일시
+            td = tr.insertCell();
+            let a = ship["etryptDt"];
+            td.appendChild(document.createTextNode(
+              `${a.slice(4,6)}.${a.slice(6,8)} ${a.slice(8,10)}:${a.slice(10)}`
+            ));
+            
+            //출항일시
+            td = tr.insertCell();
+            if(ship["tkoffDt"] !== null){
+              let a = ship["tkoffDt"];
+              td.appendChild(document.createTextNode(
+                `${a.slice(4,6)}.${a.slice(6,8)} ${a.slice(8,10)}:${a.slice(10)}`
+              ));
+            } else {
+              td.appendChild(document.createTextNode("-"));
+            }
+            
+            td = tr.insertCell();
+            td.appendChild(document.createTextNode(ship["prvsDpmprtPrtNm"]));
+            td = tr.insertCell();
+            td.appendChild(document.createTextNode(ship["nxlnptPrtNm"])); 
+          }
+        }
+      }
+      
+      function handleClick(){
+        console.log("clicked!");
+        try{
+          let data = JSON.parse(textInput.value);
+          console.log("gotData!");
+          today = `${dateInput.value.slice(0,4)}${dateInput.value.slice(5,7)}${dateInput.value.slice(8,10)}${timeInput.value}`;
+          
+          createShipTable(data["dltInOutList"]);
+        } catch(e){
+          console.error(e);
+          alert("Invalid JSON!");
+        }
+      }
+      
+      button.addEventListener("click", handleClick);
+      
+    </script>
+  </body>
+</html>

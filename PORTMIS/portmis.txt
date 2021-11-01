@@ -1,0 +1,48 @@
+# Request URL:
+
+https://new.portmis.go.kr/portmis/sp/vssl/vsch/selectSpVsslInPagingList.do
+
+# Request Headers:
+
+POST /portmis/sp/vssl/vsch/selectSpVsslInPagingList.do HTTP/1.1
+Host: new.portmis.go.kr
+Connection: keep-alive
+Content-Length: 349
+sec-ch-ua: "Google Chrome";v="95", "Chromium";v="95", ";Not A Brand";v="99"
+Referer2: page=/portmis/w2/sp/vssl/vsch/UI-PM-SP-104-02.xml&menuCd=M0182&menuNm=%EC%84%A0%EB%B0%95%EC%9E%85%EC%B6%9C%ED%95%AD%ED%98%84%ED%99%A9
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36
+Content-Type: application/json; charset="UTF-8"
+Accept: application/json
+submissionid: mf_tacMain_contents_M0182_body_sbmSelectInOutList
+sec-ch-ua-platform: "Windows"
+Origin: https://new.portmis.go.kr
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: https://new.portmis.go.kr/portmis/websquare/websquare.jsp?w2xPath=/portmis/w2/main/index.xml&page=/portmis/w2/sp/vssl/vsch/UI-PM-SP-104-02.xml&menuId=1319&menuCd=M0182&menuNm=%BC%B1%B9%DA%C0%D4%C3%E2%C7%D7%C7%F6%C8%B2
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko-KR,ko;q=0.9
+Cookie: JSESSIONID=AwZjjTEK2NnFP3vzbH5O47k7sH6wfijBaoviVO3U0Z5A06jspuSSkoKpDhKjJe65.amV1c19kb21haW4vZXh0X3BvcnRtaXMwMQ==; lastAccess=1635771841519
+
+# Response Format:
+
+Ships are in "dltInOutList".
+
+입항부두: "laidupFcltyNm"
+선박명: "vsslNm"
+선박국적: "vsslNltyNm"
+선종: "vsslKindNm"
+입항일시: "etryptDt"
+출항일시: "tkoffDt"
+전항지: "prvsDpmprtPrtNm"
+차항지: "nxlnptPrtNm"
+
+# 추가
+
+CIQ 수속일자: "ciqPrcsDt"
+수리일자: "prmisnDt"
+
+
+
+
